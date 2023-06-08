@@ -1,6 +1,6 @@
 # rimbanet
 
-to run rimbanet in docker: 
+To run rimbanet in docker: 
 
 docker pull zqs891011/rimbanet:1.0
 
@@ -11,7 +11,7 @@ https://hub.docker.com/r/zqs891011/rimbanet
 
 
 
-to run rimbanet in singularity: 
+To run rimbanet in singularity: 
 
 sudo -E singularity build rimbanet.simg singularity_abbvie
 
