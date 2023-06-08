@@ -1,0 +1,35 @@
+Bootstrap: docker
+From: ubuntu:16.04
+
+
+%files
+	BN2Distribute.tar.gz /opt
+	xerces-c-src_2_8_0.tar.gz /opt
+	
+%post
+	apt-get -y update
+	apt-get -y upgrade
+	apt-get -y install gfortran valgrind git libopenblas-dev liblapacke-dev python-pip libblas-dev liblapack-dev mpich vim wget unzip libtbb-dev axel
+	apt-get -y install libncurses5 libreadline6-dev libz-dev
+	
+	cd
+	cd ..
+	cd ..
+	cd ..
+	cd /opt
+	
+	tar -xvf BN2Distribute.tar.gz
+	tar -xvf xerces-c-src_2_8_0.tar.gz
+	cd xerces-c-src_2_8_0
+	export XERCESCROOT=/opt/xerces-c-src_2_8_0
+	cd src/xercesc
+	./runConfigure -plinux -cgcc -xg++ -minmem -nsocket -tnative -rpthread -b64
+	make
+
+	cd ..
+	cd ..
+	cd ..
+	cd BN2Distribute/BN
+	make -f Makefile testBN
+	ln -s /opt/xerces-c-src_2_8_0/lib/libxerces-c.so.28 /usr/lib/libxerces-c.so.28
+
